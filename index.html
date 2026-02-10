@@ -1,0 +1,36 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>IndyHAX â€¢ LocalStorage</title>
+  <style>
+    body{font-family:system-ui,Segoe UI,Roboto,Arial,sans-serif;max-width:900px;margin:40px auto;padding:0 16px}
+    .card{border:1px solid #ddd;border-radius:12px;padding:18px;background:#fff}
+    .muted{color:#666}
+    button{padding:10px 12px;border-radius:10px;border:1px solid #111;background:#111;color:#fff}
+    pre{background:#f6f8fa;border:1px solid #e5e7eb;border-radius:10px;padding:12px;overflow:auto}
+  </style>
+</head>
+<body>
+  <h1>IndyHAX CTF â€” LocalStorage</h1>
+  <div class="card">
+    <p class="muted">A previous developer left something behind.</p>
+    <p>Hint: open DevTools â†’ Application/Storage.</p>
+    <button id="reset">Reset demo</button>
+    <pre id="msg"></pre>
+  </div>
+
+  <script>
+    const key = 'indyhax:lastSession';
+    if (!localStorage.getItem(key)) {
+      localStorage.setItem(key, JSON.stringify({note:'temp', flag:'INDYHAX{localstorage_leaks_are_still_leaks}'}));
+    }
+    document.querySelector('#msg').textContent = 'Welcome back. Session restored.';
+    document.querySelector('#reset').addEventListener('click', () => {
+      localStorage.removeItem(key);
+      location.reload();
+    });
+  </script>
+</body>
+</html>
